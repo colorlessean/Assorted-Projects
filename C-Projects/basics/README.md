@@ -1,5 +1,12 @@
 # Compilation using GCC (GNU Compiler Collection)
 
+## Foreword
+During any of the steps below you can call the -v option to see a more verbose mode and follow along with the compilation process. Call --help to see the basics of the gcc compiler command option.
+Additionally to see the full included documentation for gcc you can simply run:
+```
+man gcc
+```
+
 ## Naive Way
 Simplist way is to simply call:
 ```
