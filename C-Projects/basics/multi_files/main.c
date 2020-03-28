@@ -1,6 +1,6 @@
 #include "library/library.h"
 
-int main(int args, int argv[]) {
+int main(int argc, char * argv[]) {
     print_message();
     return 0;
 }
