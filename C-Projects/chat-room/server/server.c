@@ -69,7 +69,7 @@ void * connection_handler(void * client_detail) {
     int client_socket = ((struct client *)client_detail)->sock_id;
     int index = ((struct client *)client_detail)->index;
 
-    printf("Client %d connected.\n",index + 1);
+    printf("Client %d connected on socket %d.\n",index + 1, client_socket);
 
     // super loop for each client handler thread to recieve and push messages
     while (1){
@@ -98,13 +98,16 @@ void generate_connection_thread(int socket_id) {
     active_clients[client_count].sock_id = accept(socket_id, (struct sockaddr *)&active_clients[client_count].client_addr, (socklen_t *) &active_clients[client_count].length);
     active_clients[client_count].index = client_count;
 
+    printf("Socket: %d\n", active_clients[client_count].sock_id);
+    printf("Index(client count): %d\n", active_clients[client_count].index);
+
     // creates a new POSIX (linux) thread
     // first argument is a location to store the thread id
     // second argument is the attributes for the thread NULL selects defaults
     // third argument is the function the thread will run on start
     // fourth argument is the argument passed to the function given as third argument
-    pthread_create(&connection_threads[client_count], NULL, connection_handler, (void *) &active_clients);
+    pthread_create(&connection_threads[client_count], NULL, connection_handler, (void *) &active_clients[client_count]);
 
     client_count++;
-    printf("%d\n", client_count);
+
 }
