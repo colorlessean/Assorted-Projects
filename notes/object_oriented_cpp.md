@@ -286,3 +286,23 @@ Generics:
 	}
 	```
 
+Solid Principles
+	1. Single Responsibility Principle
+		- Class should have one and only one reason to change. I.e. One job.
+	2. Open Closed Principle
+		- Objects should be open for extension for closed for modification. I.e. extensible without having to modify.
+	3. Liskov Substitution Principle
+		- Every base class should be substitutable for their base/parent class. I.e. when you call them there should be no big difference between which one gets called.
+	4. Interface Segregation Principle
+		- Client class should never be forced to implement an interface that it doesn't use, or depend on methods they don't use. I.e. no need to have methods that don't make sense just split into more interfaces.
+	5. Dependency Inversion Principle
+		- Entities must rely on abstractions, not on concretions. High-level module must not depend on the low-level module, but they should depend on abstractions. I.e. generic abstract classes should be provided for use in high level functions and objects. Allowing for easy swaps of say database engine rather than rewrites.
+		- Allows for dependency injection.
+
+Dependency Injection:
+	- Transfer the task of creating the object to someone else and directly use the dependency.
+	- DI acts as middle man which does all the work of creating the preferred implementation of an abstraction (object) providing it to the calling class.
+	- Using SOLID you can be sure whatever implementation of the interface of the requested object will work. And allows for quick swapping.
+	- Does have the potential to introduce run time errors as opposed to compile time. Which I do not prefer.
+
+

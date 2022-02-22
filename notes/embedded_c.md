@@ -220,6 +220,12 @@ Function Pointers:
 			Foo = &my_int_func;
 			…
 		}
+	- Function pointer with input and output types
+		int my_func(double x, void * y) { ... }
+		int main() {
+			int (*my_func)(double, void *);
+			func = &my_func
+		}
 	- Can be used in either of the two ways
 		Foo( args…);
 		(*foo)(args…);
@@ -228,4 +234,20 @@ Function Pointers:
 		○ Compar is a function you must pass to the function
 		○ You can just pass any function without any & stuff tho from your main functions
 	
+C Sockets:
+	To create a new socket
+		1. Call socket()
+		2. Call bind()
+		3. Call listen()
+		4. can then call a number of
+			send()
+			recv()
+	To accept new connections the socket must
+		1. accept()
+	To connect to an existing socket
+		1. Call socket()
+		2. Call connect()
+		3. Call a number of
+			send()
+			recv()
 

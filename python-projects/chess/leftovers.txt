@@ -1,0 +1,46 @@
+        # white
+        pieces.append(Piece(WHITE, "a1"))
+        pieces.append(Piece(WHITE, "b1"))
+        pieces.append(Piece(WHITE, "c1"))
+        pieces.append(Piece(WHITE, "d1"))
+        pieces.append(Piece(WHITE, "e1"))
+        pieces.append(Piece(WHITE, "f1"))
+        pieces.append(Piece(WHITE, "g1"))
+        pieces.append(Piece(WHITE, "h1"))
+
+        # black
+        pieces.append(Piece(BLACK, "a8"))
+        pieces.append(Piece(BLACK, "b8"))
+        pieces.append(Piece(BLACK, "c8"))
+        pieces.append(Piece(BLACK, "d8"))
+        pieces.append(Piece(BLACK, "e8"))
+        pieces.append(Piece(BLACK, "f8"))
+        pieces.append(Piece(BLACK, "g8"))
+        pieces.append(Piece(BLACK, "h8"))
+
+
+        print("|{arr[i][j]}|{}|{}|{}|{}|{}|{}|{}|")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+        print("|  |  |  |  |  |  |  |  |")
+        print("+--+--+--+--+--+--+--+--+")
+
+
+    # function to draw the actual board
+    def __str__(self):
+        string = ""
+        for piece in self.pieces:
+            string += piece.__str__()
+            string += '\n'
+        return string
