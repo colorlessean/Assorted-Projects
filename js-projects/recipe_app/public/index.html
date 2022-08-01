@@ -45,11 +45,31 @@
                 margin-left: .5em;
             }
         </style>
-        <script></script>
+        <script>
+            function testJSON() {
+                const data = {
+                    name: "Chicken Parm",
+                    servings: [2, 4],         // people
+                    time: [20, 40],           // minutes
+                    ingredients: [["Chicken Breast", "4 Whole"], ["Param", "300g"]],
+                    instructions: ["Do this", "then this", "finally this"],
+                    notes: "extra garbage to note like possibly remember blah blah or something else",
+                };
+                fetch("/recipe", {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data),
+                })
+                .then(res => {
+                    console.log(res);
+                });
+            }
+        </script>
     </head>
     <body>
         <h1>Recipe Repository</h1>
         <p>This is a basic website to store and retrieve recipes and make shopping lists.</p>
+        <button onclick="testJSON()">Test JSON POST</button>
         <h1>Input a Recipe</h1>
         <form action="/submit-recipe" method="post">
             <ul>
@@ -80,3 +100,4 @@
         </form>
     </body>
 </html>
+
