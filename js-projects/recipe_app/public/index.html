@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recipe Website</title>
+        <style>
+            form {
+                margin: 0 90px;
+                width: 500px;
+                padding: 1em;
+                border: 1px solid #CCC;
+                border-radius: 1em;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            form li + li {
+                margin-top: 1em;
+            }
+            label {
+                display: inline-block;
+                width: 180px;
+                text-align: right;
+            }
+            input,
+            textarea {
+                font: 1em sans-serif;
+                width: 300px;
+                box-sizing: border-box;
+                border: 1px solid #999;
+            }
+            input:focus,
+            textarea:focus {
+                border-color: #000;
+            }
+            textarea {
+                vertical-align: top;
+                height: 5em;
+            }
+            .button {
+                padding-left: 180px;
+            }
+            button {
+                margin-left: .5em;
+            }
+        </style>
+        <script>
+            function testJSON() {
+                const data = {
+                    name: "Chicken Parm",
+                    servings: [2, 4],         // people
+                    time: [20, 40],           // minutes
+                    ingredients: [["Chicken Breast", "4 Whole"], ["Param", "300g"]],
+                    instructions: ["Do this", "then this", "finally this"],
+                    notes: "extra garbage to note like possibly remember blah blah or something else",
+                };
+                fetch("/recipe", {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data),
+                })
+                .then(res => {
+                    console.log(res);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Recipe Repository</h1>
+        <p>This is a basic website to store and retrieve recipes and make shopping lists.</p>
+        <button onclick="testJSON()">Test JSON POST</button>
+        <h1>Input a Recipe</h1>
+        <form action="/submit-recipe" method="post">
+            <ul>
+                <li>
+                    <label for="name">Recipe Name:</label>
+                    <input type="text" id="name" name="recipe_name">
+                </li>
+                <li>
+                    <label for="">Servings:</label>
+                    <input type="text" id="servings" name="recipe_servings">
+                </li>
+                <li>
+                    <label for="name">Cook Time:</label>
+                    <input type="text" id="time" name="recipe_time">
+                </li>
+                <li>
+                    <label for="name">Ingredients:</label>
+                    <input type="text" id="ingredients" name="recipe_ingredients">
+                </li>
+                <li>
+                    <label for="name">Instructions:</label>
+                    <input type="text" id="instructions" name="recipe_instructions">
+                </li>
+                <li class="button">
+                    <button type="submit">Submit Recipe</button>
+                </li>
+            </ul>
+        </form>
+    </body>
+</html>
+
