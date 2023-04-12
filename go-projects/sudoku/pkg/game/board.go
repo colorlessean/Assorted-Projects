@@ -21,11 +21,22 @@ func newBoard(values [9][9]int) Board {
 
 // print the board with values not guesses
 func (b *Board) printBoard() {
-    for _, y := range b.boxes {
-        for _, x := range y {
-            fmt.Printf(" %d ", x)
+    for i, row := range b.boxes {
+        if i == 0 {
+            fmt.Println("┌─┬─┬─┬─┬─┬─┬─┬─┬─┐")
+        } else {
+            fmt.Println("├─┼─┼─┼─┼─┼─┼─┼─┼─┤")
         }
-        fmt.Printf("\n")
+        fmt.Print("│")
+        for _, box := range row {
+            if box.getValue() == emptyBoxValue {
+                fmt.Print(" │")
+            } else {
+                fmt.Print(box.getValue(), "│") 
+            }
+        }
+        fmt.Println()
     }
+    fmt.Println("└─┴─┴─┴─┴─┴─┴─┴─┴─┘")
 }
 

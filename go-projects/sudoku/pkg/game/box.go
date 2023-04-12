@@ -1,7 +1,7 @@
 package game
 
 const (
-    emptyBoxValue int = 1
+    emptyBoxValue int = 0 
 )
 
 type Box struct {
@@ -12,7 +12,7 @@ type Box struct {
 // function to initialize and return a new box instance
 func newBox() Box {
     box := Box{
-        value: -1,
+        value: emptyBoxValue,
         guesses: nil,
     }
     return box
