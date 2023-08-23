@@ -6,29 +6,47 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/colorlessean/Assorted-Projects/go-projects/auth-service/internal/database"
 	"github.com/colorlessean/Assorted-Projects/go-projects/auth-service/internal/login/session"
 	"github.com/gorilla/mux"
 )
 
 type Credentials struct {
-    username string `json:"username"`
-    password string `json:"password"`
+    Username string `json:"username"`
+    Password string `json:"password"`
 }
 
-func NewLoginServer() {
+type Server interface {
+    Start() error
+}
+
+type LoginServer struct {
+    db database.Database
+}
+
+func NewLoginServer(db database.Database) (Server, error) {
+    return &LoginServer{
+        db: db,
+    }, nil
+}
+
+func (ls *LoginServer) Start() error {
     router := mux.NewRouter()
 
-    router.HandleFunc("/login", loginHandler).Methods("POST")
-    router.HandleFunc("/testlogin", testLoginHanlder).Methods("GET")
-    router.HandleFunc("/logout", logoutHandler).Methods("GET")
+    router.HandleFunc("/login", ls.loginHandler).Methods("POST")
+    router.HandleFunc("/testlogin", ls.testLoginHanlder).Methods("GET")
+    router.HandleFunc("/logout", ls.logoutHandler).Methods("GET")
 
     err := http.ListenAndServe(":8080", router)
     if err != nil {
         log.Fatalf("server failed to start up: %v", err)
+        return err
     }
+
+    return nil
 }
 
-func loginHandler(w http.ResponseWriter, r *http.Request) {
+func (ls *LoginServer) loginHandler(w http.ResponseWriter, r *http.Request) {
     credentials := &Credentials{}
 
     err := json.NewDecoder(r.Body).Decode(credentials)
@@ -37,7 +55,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    session, err := login(credentials)
+    session, err := ls.login(credentials)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -62,7 +80,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // login takes in credentials and returns a sessionID and/or error
-func login(c *Credentials) (*session.Session, error) {
+func (ls *LoginServer) login(c *Credentials) (*session.Session, error) {
+    gotUser, err := ls.db.GetUser(c.Username)
+    if err != nil {
+        return nil, err
+    }
+
     session, err := session.NewSession()
     if err != nil {
         return nil, fmt.Errorf("session could not be created: %v", err)
@@ -71,11 +94,11 @@ func login(c *Credentials) (*session.Session, error) {
     return session, nil
 }
 
-func testLoginHanlder(w http.ResponseWriter, r *http.Request) {
+func (ls *LoginServer) testLoginHanlder(w http.ResponseWriter, r *http.Request) {
     // yet to implement
 }
 
-func logoutHandler(w http.ResponseWriter, r *http.Request) {
+func (ls *LoginServer) logoutHandler(w http.ResponseWriter, r *http.Request) {
     // yet to implement
 }
 
