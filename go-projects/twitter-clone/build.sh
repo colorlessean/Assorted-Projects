@@ -1,3 +1,3 @@
 #!/bin/sh
 
-go build -o out/server cmd/server/main.go
+go build -o backend/apiserver/out backend/apiserver/cmd/apiserver/main.go

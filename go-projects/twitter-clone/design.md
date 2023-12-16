@@ -31,3 +31,50 @@ The entities will be used to support some basic feature sets. Including:
 * Viewing all a Users Likes (User Page)
 * Viewing all a Users Followers (User Page)
 * Viewing all a Users Follows (User Page)
+
+## Project Structure
+my-fullstack-app
+|-- frontend
+|   |-- Dockerfile
+|   |-- public
+|   |-- src
+|   |-- package.json
+|   |-- ...
+|
+|-- backend
+|   |-- service1
+|   |   |-- cmd
+|   |   |   |-- myapp
+|   |   |       |-- main.go
+|   |   |
+|   |   |-- internal
+|   |   |   |-- api
+|   |   |       |-- handlers
+|   |   |           |-- user_handler.go
+|   |   |       |-- models
+|   |   |           |-- user.go
+|   |   |       |-- routes
+|   |   |           |-- routes.go
+|   |   |
+|   |   |-- pkg
+|   |   |   |-- myutil
+|   |   |       |-- myutil.go
+|   |   |
+|   |   |-- migrations
+|   |   |-- out
+|   |   |-- scripts
+|   |   |
+|   |   |-- .gitignore
+|   |   |-- README.md
+|   |   |-- config.yaml
+|   |   |-- Dockerfile
+|   |   |-- main.go
+|   |
+|   |-- service2
+|       |-- ...
+|
+|-- .gitignore
+|-- README.md
+|-- docker-compose.yml
+|-- go.mod
+|-- go.sum
