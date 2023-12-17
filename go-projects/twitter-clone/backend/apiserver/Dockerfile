@@ -1,16 +1,21 @@
 # Build stage
 FROM golang:latest as build
 
-WORKDIR /app/
+WORKDIR /app
 
-COPY ../.. .
+COPY go.mod go.sum ./
+RUN go mod download
 
-RUN go build -o out/apiserver cmd/apiserver/main.go
+COPY . .
+
+RUN go build -o backend/apiserver/out/apiserver backend/apiserver/cmd/apiserver/main.go
+
+# CMD ["sh", "-c", "while true; do sleep 1; done"]
 
 # Runtime stage
 FROM golang:latest
 
-WORKDIR /app/
+WORKDIR /app
 
 COPY --from=build /app/backend/apiserver/out/apiserver /app/apiserver
 
