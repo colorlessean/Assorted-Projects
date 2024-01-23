@@ -10,8 +10,6 @@ COPY . .
 
 RUN go build -o backend/apiserver/out/apiserver backend/apiserver/cmd/apiserver/main.go
 
-# CMD ["sh", "-c", "while true; do sleep 1; done"]
-
 # Runtime stage
 FROM golang:latest
 
